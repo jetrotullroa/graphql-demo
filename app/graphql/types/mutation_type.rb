@@ -1,8 +1,14 @@
-class Types::MutationType < Types::BaseObject
-  # TODO: remove me
-  field :test_field, String, null: false,
-    description: "An example field added by the generator"
-  def test_field
-    "Hello World"
+Types::MutationType = GraphQL::ObjectType.define do
+  name "Mutation"
+
+  field :injured_a_player, types.ID do
+    description "To injured a player"
+    type PlayerType
+    argument :id, !types.ID
+    resolve -> (obj, args, ctx) {
+      player = Player.find_by(id: args[:id], injured: false)
+      player.update(injured: true)
+      player
+    }
   end
 end
