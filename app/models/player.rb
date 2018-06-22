@@ -3,4 +3,5 @@ class Player < ApplicationRecord
 
   scope :no_team, -> { where(team_id: nil) }
   scope :injured, -> { where(injured: true) }
+  scope :healthy, -> { where(injured: false) }
 end

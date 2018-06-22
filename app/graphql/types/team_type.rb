@@ -10,7 +10,7 @@ TeamType = GraphQL::ObjectType.define do
   field :players do
     type types[PlayerType]
     resolve -> (obj, args, ctx) {
-      obj.players
+      obj.players.healthy
     }
   end
 end
